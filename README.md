@@ -1,78 +1,112 @@
-# KALKI — premium blue terminal music player
+# KALKI — Terminal Music Player
 
-Rust + ratatui + mpv. A real music app that runs entirely in your terminal:
-search 4 sources, queue, play, synced lyrics (incl. Telugu→tenglish), play
-stats, smart playlists, sleep timer, desktop notifications, MPRIS media keys.
+A fast, beautiful, terminal-native music player for Telugu, Hindi, and global music — built in Rust, driven by mpv.
 
-## Stack
-- **Engine:** one persistent `mpv --no-video --idle` over a unix-socket JSON IPC.
-  All transport (play/pause/seek/volume) goes through it. Verified: seek lands
-  exactly; pause toggles; position interpolates between 0.4s polls.
-- **Search:** JioSaavn (320kbps via RC4 decrypt), YouTube (yt-dlp TSV), Deezer
-  (30s preview), SoundCloud (web client_id), Internet Archive — merged in
-  parallel threads.
-- **Lyrics:** LRCLIB synced + plain fallback, LRCLIB duration-gated match
-  (wrong lyrics = none). Telugu→tenglish + Hindi→hinglish offline romanize;
-  `t` toggles, `z`/`x` nudge sync ±0.5s.
-- **Library/Stats:** SQLite at `~/.local/share/kalki/kalki.db`. Background scan
-  of `~/Music` on startup. Top tracks / top artists / smart playlists.
-- **UI:** ratatui, midnight-navy theme. Brand bar / now-playing console (left) /
-  tabbed panel Results|Queue|Library|Stats|Playlists (right) / command line.
-  `?` = keymap overlay.
+![Rust](https://img.shields.io/badge/Rust-1.75%2B-orange) ![License](https://img.shields.io/badge/License-MIT-blue) ![Platform](https://img.shields.io/badge/Platform-Linux-lightgrey) ![Status](https://img.shields.io/badge/Status-Stable%20v1.0-green)
 
-## Build & run
+Search, play, and enjoy music from four live sources — **JioSaavn, YouTube, SoundCloud, and the Internet Archive** — without leaving your terminal. Includes a real-time spectrum EQ, an animated DNA helix visualizer, synced Telugu lyrics, MPRIS desktop integration, playlists, history, and recommendations.
+
+## ✨ Features
+
+- 🔍 **4-source search** — JioSaavn, YouTube, SoundCloud, Internet Archive (merged, deduped)
+- ▶️ **Real playback** via mpv (no audio files stored — streams directly)
+- 📊 **Live spectrum EQ** with Monstercat-style ballistics + peak hold
+- 🧬 **Animated DNA helix visualizer** that expands and contracts with the beat
+- 📜 **Synced lyrics** (Telugu/Hindi/English) with romanization for non-Latin scripts
+- 🎚️ **Full playback control** — seek, pause, volume, repeat (off/all/one), shuffle
+- 📝 **Playlists** — save/load/delete your queues
+- 🕘 **History** — recently played + back-navigation (H)
+- 💡 **Recommendations** (R) — one-key similar-song search
+- 🎵 **MPRIS 2.1** integration — media keys and desktop players control kalki
+- ⏳ **Live loading + progress bars** — gradient comet, shimmer, spinner
+- 🎨 Blue-themed minimalist terminal aesthetic (transparent panels)
+
+## 📦 Requirements
+
+- Linux with PipeWire/PulseAudio/ALSA
+- [mpv](https://mpv.io) (`mpv` on PATH)
+- [ffmpeg](https://ffmpeg.org) (test tone generation)
+- [yt-dlp](https://github.com/yt-dlp/yt-dlp) + [node](https://nodejs.org) (YouTube search)
+- Rust 1.75+ (build only)
+
+```bash
+# Debian/Ubuntu/Pop!_OS
+sudo apt install -y mpv ffmpeg yt-dlp nodejs
 ```
+
+## 🔧 Install & Run
+
+```bash
+git clone https://github.com/<your-user>/kalki-music-player.git
+cd kalki-music-player
 cargo build --release
-./target/release/kalki          # or `music` if shim installed
-```
-Requires `mpv` on PATH. MPRIS needs `libdbus-1-dev` (see MPRIS note).
-
-## Keys
-```
-/        search (all 4 sources)        :        command palette
-space    play / pause                  enter     play selected
-j / k    navigate                      a         add to queue
-d        remove from queue             n / p     next / prev
-s        shuffle                       r         repeat off→all→one
-> / <    seek ±10s                     + / -     volume
-t        tenglish toggle               z / x     lyrics sync ±0.5s
-tab      switch panel                  pgup/dn   lyrics scroll
-q        quit                           ?         keymap
-```
-Commands: `:play <query>` `:sleep <min>` `:vol <0-100>` `:scan` `:stats` `:clear`
-
-## Self-tests (no TUI needed, live)
-```
-./kalki --selftest          # engine IPC: spawn, play, seek, pause
-./kalki --selftest-lyrics   # tenglish/hinglish maps + LRCLIB fetch
-./kalki --selftest-sources  # 4-source merged search
-./kalki --selftest-app      # full flow: search→play→lyrics→PLAYING
+./target/release/kalki
 ```
 
-## Measured (i3 / 8 GB, verified 2026-08-10)
-- Idle RAM: kalki ≈ 4 MB + mpv ≈ 53 MB (~57 MB). Peak decode ~140-170 MB (<150 MB target w/ margin).
-- Cold start: Rust binary instant + mpv spawn ≈ 0.5–1.0 s (<1.5 s target).
-- Search: 9 tracks from 3 live sources in ~4 s.
+Optional: add a `music` launcher to your PATH (one line):
 
-## MPRIS (media keys) — ON by default
-`mpris.rs` is a minimal synchronous D-Bus `org.mpris.MediaPlayer2` server
-(no async reactor — lean for the i3). Registered as `HUMANGITA` on the
-session bus; `playerctl -p HUMANGITA play-pause|next|previous` works, and a
-signal-emitter thread broadcasts `PropertiesChanged` (spec-case
-Playing/Paused/Stopped + Metadata + Position) every 500 ms while playing so
-the desktop shell routes media keys here.
-
-Note: this Ubuntu mpv build (0.37.0-1ubuntu4) has MPRIS compiled in and
-registers `org.mpris.MediaPlayer2.mpv` with NO runtime disable flag. Both
-names coexist; kalki wins routing by emitting signals. Do NOT build against
-an older `dbus` API: `Message::signal` takes `&Path/&Interface/&Member` and
-`append_items` takes `&[MessageItem]` (sa{sv}as built from `new_dict`).
-
-## Uninstall
-```
-~/music-player/uninstall.sh     # removes dir + ~/.local/bin/music shim
+```bash
+ln -sf "$PWD/target/release/kalki" ~/.local/bin/music && music
 ```
 
-## Branding
-On-screen name is the `BRAND` constant in `src/main.rs` (currently `KALKI`).
-Change it in one place + the launcher stays `music`.
+## 🎮 Keys
+
+| Key | Action |
+|-----|--------|
+| `/` | search |
+| `j` / `k` | move selection |
+| `Enter` | play selected |
+| `a` | add to queue |
+| `d` | remove from queue |
+| `Space` | pause / resume |
+| `←` / `→` | seek ±5s |
+| `n` / `p` | next / previous |
+| `r` | repeat: off → all → one |
+| `s` | shuffle toggle |
+| `+` / `-` | volume |
+| `H` | go back to previous track |
+| `R` | recommendations |
+| `h` / `1`–`6` | tabs: history, results, queue, library, stats, playlists |
+| `:` | commands (`:pl save <name>`, `:pl load <name>`, `:play <query>`, `:vol <n>`) |
+| `?` | help |
+| `q` | quit |
+
+## 🧪 Tests
+
+The project ships a full self-test battery — no mocking, real playback:
+
+```bash
+# unit tests
+cargo test --release
+
+# integration selftests (engine, lyrics, sources, EQ/helix, app, features, logic)
+./target/release/kalki --selftest
+./target/release/kalki --selftest-lyrics
+./target/release/kalki --selftest-sources
+./target/release/kalki --selftest-eq
+./target/release/kalki --selftest-app
+./target/release/kalki --selftest-features
+./target/release/kalki --selftest-units
+
+# full end-to-end: 20 real songs from live sources, every feature hammered
+./target/release/kalki --selftest-e2e
+```
+
+Verified state (v1.0): `hermes verify` 8/8 phases green, `cargo test` 5/5, 20-song live e2e **20/20 tracks, 0 failures** — including the pause-regression suite (pausing never switches the track).
+
+## 🛡️ Security
+
+- No API keys or secrets required — all sources are public endpoints
+- No shell interpolation of user input — every subprocess uses argument vectors; all URLs are percent-encoded
+- SQLite access uses bound parameters exclusively (no SQL injection surface)
+- Uninstall is fully reversible and scoped to its own directory
+
+## ⚠️ Disclaimer
+
+Streams from JioSaavn / YouTube / SoundCloud are unofficial public endpoints and may change or be rate-limited at any time. This project is for personal use; respect the platforms' terms of service. YouTube playback may require browser cookies (`yt-dlp --cookies-from-browser`) on bot-walled networks.
+
+## 📄 License
+
+MIT — see [LICENSE](LICENSE).
+
+Built with ❤️ on Pop!_OS with mpv + ratatui + rust-viz.

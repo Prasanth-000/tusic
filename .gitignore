@@ -2,3 +2,5 @@
 *.db
 *.wav
 /tmp
+.hermes/plans/
+.hermes/state/
