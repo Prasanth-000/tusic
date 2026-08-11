@@ -37,7 +37,7 @@ sudo apt install -y mpv ffmpeg yt-dlp nodejs
 ## 🔧 Install & Run
 
 ```bash
-git clone https://github.com/Prasanth-000/kalki-music-player.git
+git clone https://github.com/Prasanth-000/human-gita.git
 cd kalki-music-player
 cargo build --release
 ./target/release/human-gita
