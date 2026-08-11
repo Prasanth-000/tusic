@@ -92,7 +92,7 @@ cargo test --release
 ./target/release/human-gita --selftest-e2e
 ```
 
-Verified state (v1.0): `hermes verify` 8/8 phases green, `cargo test` 5/5, 20-song live e2e **20/20 tracks, 0 failures** — including the pause-regression suite (pausing never switches the track).
+Verified state (v1.0): `build + 7 integration tests` 8/8 phases green, `cargo test` 5/5, 20-song live e2e **20/20 tracks, 0 failures** — including the pause-regression suite (pausing never switches the track).
 
 ## 🛡️ Security
 
