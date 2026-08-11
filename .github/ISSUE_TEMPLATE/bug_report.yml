@@ -1,0 +1,54 @@
+name: Bug report
+about: Report a bug in HUMAN-GITA
+title: "[BUG] "
+labels: [bug]
+assignees: [Prasanth-000]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of what the bug is.
+      placeholder: |
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: |
+      placeholder: |
+        1. 
+        2. 
+        3. 
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What you expected to happen.
+      placeholder: |
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: |
+      placeholder: |
+        - OS: (e.g. Pop!_OS 24.04, Arch, Fedora)
+        - mpv version: `mpv --version`
+        - yt-dlp version: `yt-dlp --version`
+        - Rust version: `rustc --version`
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Run with RUST_LOG=debug and paste relevant output
+      render: text
+      placeholder: |
+    validations:
+      required: false

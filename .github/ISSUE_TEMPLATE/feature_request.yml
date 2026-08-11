@@ -1,0 +1,34 @@
+---
+name: Feature request
+about: Suggest an idea for HUMAN-GITA
+title: "[FEAT] "
+labels: [enhancement]
+assignees: [Prasanth-000]
+body:
+  - type: markdown
+    attributes:
+      value: "## Feature Request"
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One-sentence summary of the feature.
+      placeholder: ""
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Why is this needed? What problem does it solve?
+      placeholder: ""
+    validations:
+      required: true
+  - type: textarea
+    id: design
+    attributes:
+      label: Design / implementation notes
+      description: Any ideas on how it could work (keys, UI, config, etc.)
+      placeholder: ""
+    validations:
+      required: false
