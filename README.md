@@ -96,10 +96,11 @@ Verified state (v1.0): `hermes verify` 8/8 phases green, `cargo test` 5/5, 20-so
 
 ## 🛡️ Security
 
+- **Dependency audit (cargo-audit): 0 vulnerabilities, 0 CVEs** — 300 crates scanned against the RustSec advisory DB. 3 advisory-grade warnings remain, all transitive via `ratatui` (lru: unsound API patterns not reachable in this app; paste: unmaintained macro helper) — documented, not exploitable.
 - No API keys or secrets required — all sources are public endpoints
 - No shell interpolation of user input — every subprocess uses argument vectors; all URLs are percent-encoded
 - SQLite access uses bound parameters exclusively (no SQL injection surface)
-- Uninstall is fully reversible and scoped to its own directory
+- Uninstall is fully reversible and scoped to its own directory (`uninstall.sh` removes only `~/music-player` + the optional `music` shim)
 
 ## ⚠️ Disclaimer
 
