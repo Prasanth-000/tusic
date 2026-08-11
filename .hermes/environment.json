@@ -8,13 +8,13 @@
       "cargo build --release"
     ],
     "test": [
-      "./target/release/kalki --selftest",
-      "./target/release/kalki --selftest-lyrics",
-      "./target/release/kalki --selftest-sources",
-      "./target/release/kalki --selftest-eq",
-      "./target/release/kalki --selftest-app",
-      "./target/release/kalki --selftest-features",
-      "./target/release/kalki --selftest-units"
+      "./target/release/human-gita --selftest",
+      "./target/release/human-gita --selftest-lyrics",
+      "./target/release/human-gita --selftest-sources",
+      "./target/release/human-gita --selftest-eq",
+      "./target/release/human-gita --selftest-app",
+      "./target/release/human-gita --selftest-features",
+      "./target/release/human-gita --selftest-units"
     ],
     "evidence": [
       "Detected Cargo.toml",

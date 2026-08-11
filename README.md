@@ -1,10 +1,10 @@
-# KALKI — Terminal Music Player
+# HUMAN-GITA — Terminal Music Player
 
-A fast, beautiful, terminal-native music player for Telugu, Hindi, and global music — built in Rust, driven by mpv.
+A fast, beautiful, terminal-native music player for **Telugu, Hindi, English, and global music** — built in Rust, driven by mpv.
 
 ![Rust](https://img.shields.io/badge/Rust-1.75%2B-orange) ![License](https://img.shields.io/badge/License-MIT-blue) ![Platform](https://img.shields.io/badge/Platform-Linux-lightgrey) ![Status](https://img.shields.io/badge/Status-Stable%20v1.0-green)
 
-Search, play, and enjoy music from four live sources — **JioSaavn, YouTube, SoundCloud, and the Internet Archive** — without leaving your terminal. Includes a real-time spectrum EQ, an animated DNA helix visualizer, synced Telugu lyrics, MPRIS desktop integration, playlists, history, and recommendations.
+Search, play, and enjoy music from four live sources — **JioSaavn, YouTube, SoundCloud, and the Internet Archive** — without leaving your terminal. Includes a real-time spectrum EQ, an animated DNA helix visualizer, synced lyrics (Telugu, Hindi, English), MPRIS desktop integration, playlists, history, and recommendations.
 
 ## ✨ Features
 
@@ -40,13 +40,13 @@ sudo apt install -y mpv ffmpeg yt-dlp nodejs
 git clone https://github.com/Prasanth-000/kalki-music-player.git
 cd kalki-music-player
 cargo build --release
-./target/release/kalki
+./target/release/human-gita
 ```
 
 Optional: add a `music` launcher to your PATH (one line):
 
 ```bash
-ln -sf "$PWD/target/release/kalki" ~/.local/bin/music && music
+ln -sf "$PWD/target/release/human-gita" ~/.local/bin/music && music
 ```
 
 ## 🎮 Keys
@@ -80,16 +80,16 @@ The project ships a full self-test battery — no mocking, real playback:
 cargo test --release
 
 # integration selftests (engine, lyrics, sources, EQ/helix, app, features, logic)
-./target/release/kalki --selftest
-./target/release/kalki --selftest-lyrics
-./target/release/kalki --selftest-sources
-./target/release/kalki --selftest-eq
-./target/release/kalki --selftest-app
-./target/release/kalki --selftest-features
-./target/release/kalki --selftest-units
+./target/release/human-gita --selftest
+./target/release/human-gita --selftest-lyrics
+./target/release/human-gita --selftest-sources
+./target/release/human-gita --selftest-eq
+./target/release/human-gita --selftest-app
+./target/release/human-gita --selftest-features
+./target/release/human-gita --selftest-units
 
 # full end-to-end: 20 real songs from live sources, every feature hammered
-./target/release/kalki --selftest-e2e
+./target/release/human-gita --selftest-e2e
 ```
 
 Verified state (v1.0): `hermes verify` 8/8 phases green, `cargo test` 5/5, 20-song live e2e **20/20 tracks, 0 failures** — including the pause-regression suite (pausing never switches the track).

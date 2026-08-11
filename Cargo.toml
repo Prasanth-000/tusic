@@ -1,8 +1,12 @@
 [package]
-name = "kalki"
+name = "human-gita"
 version = "0.1.0"
 edition = "2021"
-description = "KALKI — premium blue terminal music player (Rust + ratatui + mpv)"
+description = "HUMAN-GITA — premium terminal music player (Rust + ratatui + mpv): Telugu, Hindi & English music"
+
+[[bin]]
+name = "human-gita"
+path = "src/main.rs"
 
 [dependencies]
 ratatui = "0.29"
