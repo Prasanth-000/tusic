@@ -15,7 +15,7 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
       - name: Install system deps
         run: |
-          sudo apt-get update && sudo apt-get install -y mpv ffmpeg yt-dlp nodejs
+          sudo apt-get update && sudo apt-get install -y mpv ffmpeg yt-dlp nodejs libdbus-1-dev pkg-config
       - name: Build
         run: cargo build --release
       - name: Unit tests
