@@ -1,40 +1,40 @@
 # HUMAN-GITA — Terminal Music Player
 
-A fast, beautiful, terminal-native music player for **Telugu, Hindi, English, and global music** — built in Rust, driven by mpv.
+A terminal music player for Telugu, Hindi, English, and whatever else you search for. Written in Rust, plays through mpv.
 
 ![Rust](https://img.shields.io/badge/Rust-1.75%2B-orange) ![License](https://img.shields.io/badge/License-MIT-blue) ![Platform](https://img.shields.io/badge/Platform-Linux-lightgrey) ![Status](https://img.shields.io/badge/Status-Stable%20v1.0-green)
 
-Search, play, and enjoy music from four live sources — **JioSaavn, YouTube, SoundCloud, and the Internet Archive** — without leaving your terminal. Includes a real-time spectrum EQ, an animated DNA helix visualizer, synced lyrics (Telugu, Hindi, English), MPRIS desktop integration, playlists, history, and recommendations.
+You can search and play from four sources — JioSaavn, YouTube, SoundCloud, and the Internet Archive — without leaving the terminal. It also has a live spectrum EQ, a DNA-helix visualizer that breathes with the beat, synced lyrics for Telugu/Hindi/English (with romanization), MPRIS desktop control, playlists, and history.
 
-## ✨ Features
+## Features
 
-- 🔍 **4-source search** — JioSaavn, YouTube, SoundCloud, Internet Archive (merged, deduped)
-- ▶️ **Real playback** via mpv (no audio files stored — streams directly)
-- 📊 **Live spectrum EQ** with Monstercat-style ballistics + peak hold
-- 🧬 **Animated DNA helix visualizer** that expands and contracts with the beat
-- 📜 **Synced lyrics** (Telugu/Hindi/English) with romanization for non-Latin scripts
-- 🎚️ **Full playback control** — seek, pause, volume, repeat (off/all/one), shuffle
-- 📝 **Playlists** — save/load/delete your queues
-- 🕘 **History** — recently played + back-navigation (H)
-- 💡 **Recommendations** (R) — one-key similar-song search
-- 🎵 **MPRIS 2.1** integration — media keys and desktop players control kalki
-- ⏳ **Live loading + progress bars** — gradient comet, shimmer, spinner
-- 🎨 Blue-themed minimalist terminal aesthetic (transparent panels)
+- Search across four sources at once (JioSaavn, YouTube, SoundCloud, Internet Archive); results get merged and de-duplicated
+- Real playback through mpv — no files downloaded, it streams
+- Live spectrum EQ with Monstercat-style ballistics and peak hold
+- DNA-helix visualizer that expands and contracts with the beat
+- Synced lyrics for Telugu, Hindi, and English, romanized so non-Latin scripts stay readable
+- Full playback control: seek, pause, volume, repeat (off/all/one), shuffle
+- Playlists you can save, load, and delete
+- History of recently played tracks plus back-navigation (press H)
+- Recommendations (press R) — one key pulls similar songs
+- MPRIS 2.1 so media keys and desktop players can drive it
+- Loading and progress feedback: gradient comet, shimmer, spinner
+- Blue-themed minimal terminal look with transparent panels
 
-## 📦 Requirements
+## Requirements
 
-- Linux with PipeWire/PulseAudio/ALSA
-- [mpv](https://mpv.io) (`mpv` on PATH)
-- [ffmpeg](https://ffmpeg.org) (test tone generation)
-- [yt-dlp](https://github.com/yt-dlp/yt-dlp) + [node](https://nodejs.org) (YouTube search)
-- Rust 1.75+ (build only)
+- Linux with PipeWire, PulseAudio, or ALSA
+- mpv on your PATH
+- ffmpeg (used by the test-tone generator)
+- yt-dlp and node (needed for YouTube search)
+- Rust 1.75 or newer if you are building from source
 
 ```bash
-# Debian/Ubuntu/Pop!_OS
+# Debian / Ubuntu / Pop!_OS
 sudo apt install -y mpv ffmpeg yt-dlp nodejs
 ```
 
-## 🔧 Install & Run
+## Install and run
 
 ```bash
 git clone https://github.com/Prasanth-000/human-gita.git
@@ -43,13 +43,13 @@ cargo build --release
 ./target/release/human-gita
 ```
 
-Optional: add a `music` launcher to your PATH (one line):
+Want a `music` command instead of typing the full path? Symlink it:
 
 ```bash
 ln -sf "$PWD/target/release/human-gita" ~/.local/bin/music && music
 ```
 
-## 🎮 Keys
+## Keys
 
 | Key | Action |
 |-----|--------|
@@ -71,9 +71,9 @@ ln -sf "$PWD/target/release/human-gita" ~/.local/bin/music && music
 | `?` | help |
 | `q` | quit |
 
-## 🧪 Tests
+## Tests
 
-The project ships a full self-test battery — no mocking, real playback:
+The suite runs against real playback, no mocking:
 
 ```bash
 # unit tests
@@ -92,22 +92,22 @@ cargo test --release
 ./target/release/human-gita --selftest-e2e
 ```
 
-Verified state (v1.0): `build + 7 integration tests` 8/8 phases green, `cargo test` 5/5, 20-song live e2e **20/20 tracks, 0 failures** — including the pause-regression suite (pausing never switches the track).
+Verified state for v1.0: build plus 7 integration tests all green, `cargo test` 5/5, and a 20-song live end-to-end run that played 20/20 tracks with zero failures. That run includes a pause-regression check confirming pausing never silently switches tracks.
 
-## 🛡️ Security
+## Security
 
-- **Dependency audit (cargo-audit): 0 vulnerabilities, 0 CVEs** — 300 crates scanned against the RustSec advisory DB. 3 advisory-grade warnings remain, all transitive via `ratatui` (lru: unsound API patterns not reachable in this app; paste: unmaintained macro helper) — documented, not exploitable.
-- No API keys or secrets required — all sources are public endpoints
-- No shell interpolation of user input — every subprocess uses argument vectors; all URLs are percent-encoded
-- SQLite access uses bound parameters exclusively (no SQL injection surface)
-- Uninstall is fully reversible and scoped to its own directory (`uninstall.sh` removes only `~/music-player` + the optional `music` shim)
+- Dependency audit (cargo-audit) against the RustSec database: no CVEs. One advisory-grade warning remains, transitive via ratatui — `paste`, an unmaintained macro helper — documented and not exploitable in this app.
+- No API keys or secrets. Every source is a public endpoint.
+- User input never reaches a shell. Every subprocess call uses argument vectors, and all URLs are percent-encoded.
+- SQLite queries use bound parameters only, so there is no SQL-injection surface.
+- Uninstall is scoped to its own directory. `uninstall.sh` removes `~/music-player` and the optional `music` shim, nothing else.
 
-## ⚠️ Disclaimer
+## Disclaimer
 
-Streams from JioSaavn / YouTube / SoundCloud are unofficial public endpoints and may change or be rate-limited at any time. This project is for personal use; respect the platforms' terms of service. YouTube playback may require browser cookies (`yt-dlp --cookies-from-browser`) on bot-walled networks.
+JioSaavn, YouTube, and SoundCloud streams come from unofficial public endpoints that can change or get rate-limited without notice. This is for personal use; respect each platform's terms of service. On bot-walled networks, YouTube playback may need browser cookies (`yt-dlp --cookies-from-browser`).
 
-## 📄 License
+## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See LICENSE.
 
-Built with ❤️ on Pop!_OS with mpv + ratatui + rust-viz.
+Built on Pop!_OS with mpv, ratatui, and a pile of late-night Rust.
