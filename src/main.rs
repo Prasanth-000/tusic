@@ -990,12 +990,12 @@ fn selftest_e2e() -> Result<()> {
 
     // playlists on REAL tracks (save 10 → load → list → delete)
     let pl_name = format!("e2e-{}", std::process::id());
-    let n = crate::db::save_playlist(&pl_name, &tracks[..10]).map_err(|e| anyhow::anyhow!("{e}"))?;
+    let n = crate::db::save_playlist(&pl_name, &tracks).map_err(|e| anyhow::anyhow!("{e}"))?;
     let loaded = crate::db::load_playlist(&pl_name);
     let listed = crate::db::list_playlists();
     crate::db::delete_playlist(&pl_name).map_err(|e| anyhow::anyhow!("{e}"))?;
-    let pl_ok = n == 10
-        && loaded.as_ref().map(|l| l.len() == 10).unwrap_or(false)
+    let pl_ok = n == tracks.len()
+        && loaded.as_ref().map(|l| l.len() == tracks.len()).unwrap_or(false)
         && listed.iter().any(|(nm, _, _)| nm == &pl_name)
         && crate::db::load_playlist(&pl_name).is_none();
     if !pl_ok {
