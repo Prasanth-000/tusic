@@ -21,6 +21,12 @@ You can search and play from four sources — JioSaavn, YouTube, SoundCloud, and
 - Loading and progress feedback: gradient comet, shimmer, spinner
 - Blue-themed minimal terminal look with transparent panels
 
+
+## Screenshots
+
+![Now Playing](screenshots/screenshot-1.png)
+![Search](screenshots/screenshot-2.png)
+![Library](screenshots/screenshot-3.png)
 ## Requirements
 
 - Linux with PipeWire, PulseAudio, or ALSA
