@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-08-11
 
 ### Added
-- Initial release: HUMAN-GITA terminal music player
+- Initial release: TUSIC terminal music player
 - 4-source search: JioSaavn, YouTube, SoundCloud, Internet Archive
 - Real-time spectrum EQ with Monstercat ballistics
 - Animated DNA helix visualizer (Bresenham curves, energy-driven)

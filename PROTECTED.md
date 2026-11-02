@@ -1,4 +1,4 @@
-# HUMAN-GITA — PROTECTED STABLE BASELINE
+# TUSIC — PROTECTED STABLE BASELINE
 
 Status: STABLE — verified 2026-08-11. DO NOT DELETE OR REWRITE THIS BASELINE.
 
@@ -21,4 +21,4 @@ Status: STABLE — verified 2026-08-11. DO NOT DELETE OR REWRITE THIS BASELINE.
 - Future work IMPROVES on top of this baseline — never deletes or rewrites it.
 - New changes are committed as NEW commits/tags (stable-v2, ...); the baseline
   stays recoverable forever.
-- The user's daily driver: `music` (shim → ~/music-player/target/release/human-gita).
+- The user's daily driver: `music` (shim → ~/music-player/target/release/tusic).

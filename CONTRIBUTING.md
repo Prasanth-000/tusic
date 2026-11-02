@@ -1,4 +1,4 @@
-# Contributing to HUMAN-GITA
+# Contributing to TUSIC
 
 Thanks for considering a contribution! This is a personal project, but improvements are welcome.
 
@@ -12,17 +12,17 @@ Thanks for considering a contribution! This is a personal project, but improveme
 ## Development setup
 
 ```bash
-git clone https://github.com/Prasanth-000/human-gita.git
-cd human-gita
+git clone https://github.com/Prasanth-000/tusic.git
+cd tusic
 cargo build --release
-./target/release/human-gita
+./target/release/tusic
 ```
 
 Run the test battery before submitting:
 
 ```bash
 cargo test --release
-./target/release/human-gita --selftest-units
+./target/release/tusic --selftest-units
 ```
 
 ## Code style
