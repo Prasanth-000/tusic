@@ -1,4 +1,4 @@
-//! HUMAN-GITA — premium blue terminal music player.
+//! TUSIC — terminal music player.
 //! Rust + ratatui + mpv. 5 sources, LRCLIB lyrics + tenglish, stats, queue.
 
 mod app;
@@ -23,7 +23,7 @@ use std::sync::{Arc, Mutex};
 use std::time::Duration;
 use app::App;
 
-pub const BRAND: &str = "HUMAN-GITA";
+pub const BRAND: &str = "TUSIC";
 
 fn main() -> Result<()> {
     let args: Vec<String> = std::env::args().collect();
@@ -578,7 +578,7 @@ fn selftest_ui() -> Result<()> {
     let buf = term.backend().buffer().clone();
     let rendered: String = buf.content().iter().map(|c| c.symbol()).collect();
     assert!(
-        rendered.contains("HUMAN-GITA") || rendered.contains("KALKI"),
+        rendered.contains("TUSIC") || rendered.contains("KALKI"),
         "emblem text not rendered"
     );
     println!("[ui] rendered 120x40 + 80x18 without panic");

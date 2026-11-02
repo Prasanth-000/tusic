@@ -1,4 +1,4 @@
-# HUMAN-GITA — Terminal Music Player
+# TUSIC — Terminal Music Player
 
 A terminal music player for Telugu, Hindi, English, and whatever else you search for. Written in Rust, plays through mpv.
 
@@ -37,16 +37,16 @@ sudo apt install -y mpv ffmpeg yt-dlp nodejs
 ## Install and run
 
 ```bash
-git clone https://github.com/Prasanth-000/human-gita.git
+git clone https://github.com/Prasanth-000/tusic.git
 cd kalki-music-player
 cargo build --release
-./target/release/human-gita
+./target/release/tusic
 ```
 
 Want a `music` command instead of typing the full path? Symlink it:
 
 ```bash
-ln -sf "$PWD/target/release/human-gita" ~/.local/bin/music && music
+ln -sf "$PWD/target/release/tusic" ~/.local/bin/music && music
 ```
 
 ## Keys
@@ -80,16 +80,16 @@ The suite runs against real playback, no mocking:
 cargo test --release
 
 # integration selftests (engine, lyrics, sources, EQ/helix, app, features, logic)
-./target/release/human-gita --selftest
-./target/release/human-gita --selftest-lyrics
-./target/release/human-gita --selftest-sources
-./target/release/human-gita --selftest-eq
-./target/release/human-gita --selftest-app
-./target/release/human-gita --selftest-features
-./target/release/human-gita --selftest-units
+./target/release/tusic --selftest
+./target/release/tusic --selftest-lyrics
+./target/release/tusic --selftest-sources
+./target/release/tusic --selftest-eq
+./target/release/tusic --selftest-app
+./target/release/tusic --selftest-features
+./target/release/tusic --selftest-units
 
 # full end-to-end: 20 real songs from live sources, every feature hammered
-./target/release/human-gita --selftest-e2e
+./target/release/tusic --selftest-e2e
 ```
 
 Verified state for v1.0: build plus 7 integration tests all green, `cargo test` 5/5, and a 20-song live end-to-end run that played 20/20 tracks with zero failures. That run includes a pause-regression check confirming pausing never silently switches tracks.

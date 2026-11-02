@@ -1,4 +1,4 @@
-//! HUMAN-GITA MPRIS — minimal synchronous D-Bus MediaPlayer2 server.
+//! TUSIC MPRIS — minimal synchronous D-Bus MediaPlayer2 server.
 //! Lets media keys / playerctl control playback. Uses the `dbus-crossroads`
 //! crate (pure-Rust, tiny, no async reactor) — lean for the i3.
 

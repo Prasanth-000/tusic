@@ -1,11 +1,11 @@
 [package]
-name = "human-gita"
+name = "tusic"
 version = "0.1.0"
 edition = "2021"
-description = "HUMAN-GITA — premium terminal music player (Rust + ratatui + mpv): Telugu, Hindi & English music"
+description = "TUSIC — terminal music player (Rust + ratatui + mpv): Telugu, Hindi & English music"
 
 [[bin]]
-name = "human-gita"
+name = "tusic"
 path = "src/main.rs"
 
 [dependencies]
